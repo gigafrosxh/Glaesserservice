@@ -1,17 +1,30 @@
 <div class="container">
   <h1>Ticket Erstellen</h1>
-  <label for="title">Titel</label>
-  <input type="text" id="title" [(ngModel)]="titel">
-  <label for="desc">Beschreibung</label>
-  <input type="text" id="desc" [(ngModel)]="desc">
+
+
+  <select name="desc" id="desc" [(ngModel)]="desc">
+    <option value="-">Beschreibung auswählen...</option>
+    <option value="bringen">saubere Gläser bringen</option>
+    <option value="abholen">gebrauchte Gläser abholen</option>
+    <option value="">Sonstiges</option>
+  </select>
+
+  @if (desc()!= "bringen" && (desc()!= "abholen" && desc() != "-")){
+    <label for="desc">Sonstiges hier eingeben:</label>
+    <input type="text" id="titel" [(ngModel)]="titel">
+  }
+
   <select name="getraenk" id="getraenk" [(ngModel)]="getraenk">
+    <option value="-">Glasart auswählen...</option>
     <option value="rotwein">Rotweinglas</option>
     <option value="weißwein">Weißweinglas</option>
     <option value="tumblr">Tumbler</option>
+    <option value="eigene">Eigene</option>
   </select>
+
   <label for="anzahl">Anzahl</label>
   <input type="number" min="0" id="anzahl" [(ngModel)]="anzahl">
   <label for="stand">Standnummer</label>
-  <input type="number" min="0" id="stand" [(ngModel)]="absender">
+  <input id="stand" [(ngModel)]="absender">
   <button (click)="sendData()">Senden</button>
 </div>

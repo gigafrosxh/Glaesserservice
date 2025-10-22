@@ -13,13 +13,12 @@ import {FormsModule} from '@angular/forms';
 export class App {
 
   titel = signal('');
-  desc = signal('');
-  getraenk = signal('');
+  desc = signal('-');
+  getraenk = signal('-');
   anzahl = signal('');
   absender = signal('');
 
   ticket = {
-    typ: null,
     titel: "",
     beschreibung: "",
     absender: ""
