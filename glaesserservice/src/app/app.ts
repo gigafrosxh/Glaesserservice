@@ -26,20 +26,24 @@ export class App {
 
   sendData() {
     this.ticket.titel = this.titel();
-    this.ticket.beschreibung = this.desc() + ":" + this.getraenk() + "x" + this.anzahl();
+    this.ticket.beschreibung = `${this.desc()}: ${this.getraenk()} x ${this.anzahl()}`;
     this.ticket.absender = this.absender();
-    console.log(this.ticket);
 
-
-    /*fetch("https://glaeserservice.moxxl.eu/insertTicket.php", {
+    fetch("https://glaeserservice.moxxl.eu/insertTicket.php", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(this.ticket)
     })
       .then(res => res.json())
-      .then(data => console.log("Antwort:", data))
-      .catch(err => console.error("Fehler:", err));*/
+      .then(data => {
+        console.log("Antwort:", data);
+        if (data.success) {
+          alert("Ticket erfolgreich gespeichert! ID: " + data.id);
+        } else {
+          alert("Fehler beim Speichern: " + (data.error || "unbekannt"));
+        }
+      })
+      .catch(err => console.error("Fehler:", err));
   }
+
 }
