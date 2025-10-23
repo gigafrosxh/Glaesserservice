@@ -11,7 +11,7 @@
 
   @if (desc()!= "bringen" && (desc()!= "abholen" && desc() != "-")){
     <label for="desc">Sonstiges hier eingeben:</label>
-    <input type="text" id="titel" [(ngModel)]="titel">
+    <input type="text" id="titel" [(ngModel)]="desc">
   }
 
   <select name="getraenk" id="getraenk" [(ngModel)]="getraenk">
@@ -25,6 +25,7 @@
   <label for="anzahl">Anzahl</label>
   <input type="number" min="0" id="anzahl" [(ngModel)]="anzahl">
   <label for="stand">Standnummer</label>
-  <input id="stand" [(ngModel)]="absender">
-  <button (click)="sendData()">Senden</button>
+  <p [hidden]="absender() !== ''" style="color: red; margin-bottom: 0;">Standnummer ist auszufüllen!</p>
+  <input id="stand" [(ngModel)]="absender" required [class.empty]="absender() === ''">
+  <button (click)="sendData()" [disabled]="absender() === ''">Senden</button>
 </div>

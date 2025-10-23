@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -12,24 +13,21 @@ import {FormsModule} from '@angular/forms';
 })
 export class App {
 
-  titel = signal('');
   desc = signal('-');
   getraenk = signal('-');
   anzahl = signal('');
   absender = signal('');
 
   ticket = {
-    titel: "",
     beschreibung: "",
     absender: ""
   }
 
   sendData() {
-    this.ticket.titel = this.titel();
     this.ticket.beschreibung = `${this.desc()}: ${this.getraenk()} x ${this.anzahl()}`;
     this.ticket.absender = this.absender();
 
-    fetch("https://glaeserservice.moxxl.eu/insertTicket.php", {
+    fetch("https://glaeserservice.moxxl.eu/api/createTicket.php", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(this.ticket)
@@ -43,7 +41,7 @@ export class App {
           alert("Fehler beim Speichern: " + (data.error || "unbekannt"));
         }
       })
-      .catch(err => console.error("Fehler:", err));
+      .catch(err => console.error(JSON.stringify(this.ticket) + "; Fehler:", err));
   }
 
 }

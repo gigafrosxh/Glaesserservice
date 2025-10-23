@@ -28,6 +28,14 @@ button {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+button:disabled {
+  background-color: #ddd;
+}
+button:disabled:hover {
+  background-color: #ddd;
+  transform: none;
+}
+
 button:hover {
   background-color: #0056b3;
   transform: translateY(-2px);
@@ -44,4 +52,8 @@ input, textarea, select {
 input:focus, textarea:focus, select:focus {
   border-color: #007bff;
   outline: none;
+}
+
+input.empty {
+  border-color: red;
 }
